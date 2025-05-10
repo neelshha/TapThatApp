@@ -12,8 +12,7 @@ A macOS application that provides quick access to your favorite applications thr
 
 ## Requirements
 
-- macOS 11.0 or later
-- Xcode 13.0 or later (for development)
+- Xcode 13.0 or later
 - Swift 5.5 or later
 
 ## Installation
