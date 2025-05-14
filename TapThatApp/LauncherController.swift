@@ -4,68 +4,128 @@ import SwiftUI
 import HotKey
 
 class LauncherController {
-    private var panel: NSPanel?
+    private var window: NSWindow?
     private var hotKey: HotKey?
     private let store = SettingsStore() // Shared settings store
+    private var isShowing = false
 
     init() {
         hotKey = HotKey(key: .space, modifiers: [.option])
 
         hotKey?.keyDownHandler = { [weak self] in
+            print("🔽 Option + Space pressed")
             self?.showLauncher()
         }
 
         hotKey?.keyUpHandler = { [weak self] in
-            self?.hideLauncher()
+            print("🔼 Option + Space released")
+            // Only hide if we're actually showing
+            if self?.isShowing == true {
+                self?.hideLauncher()
+            }
         }
     }
 
     func showLauncher() {
-        if panel != nil { return } // avoid duplicates
+        if window != nil { 
+            print("⚠️ Window already exists, returning")
+            return 
+        }
 
-        let selectedPaths = SettingsStore().selectedAppPaths
+        print("🔄 Creating launcher window...")
+        let selectedPaths = store.selectedAppPaths
+        print("📱 Selected apps: \(selectedPaths.count)")
+        
         let apps: [AppIcon] = selectedPaths.compactMap { path in
             let url = URL(fileURLWithPath: path)
-            guard FileManager.default.fileExists(atPath: path) else { return nil }
+            guard FileManager.default.fileExists(atPath: path) else { 
+                print("❌ App not found: \(path)")
+                return nil 
+            }
             let name = url.deletingPathExtension().lastPathComponent
             let icon = NSWorkspace.shared.icon(forFile: path)
-            icon.size = NSSize(width: 48, height: 48)
+            icon.size = NSSize(width: store.iconSize, height: store.iconSize)
             return AppIcon(name: name, icon: icon, path: path)
         }
-        let position = getMousePosition()
+        
+        print("🎯 Creating ContentView with \(apps.count) apps")
+        let mouseLocation = NSEvent.mouseLocation
+        let screen = NSScreen.main ?? NSScreen.screens[0]
+        let screenHeight = screen.frame.height
+        
+        print("📍 Mouse location: \(mouseLocation)")
+        print("🖥️ Screen height: \(screenHeight)")
+        
+        // Calculate true outer radius and window size
         let radius = CGFloat(store.ringRadius)
+        let iconSize = CGFloat(store.iconSize)
+        let margin: CGFloat = 16 // for shadow or extra space
+        let outerRadius = radius + iconSize / 2 + margin
+        let windowSize = outerRadius * 2
+        
+        print("📏 Radius: \(radius), Icon size: \(iconSize), Outer radius: \(outerRadius), Window size: \(windowSize)")
+        
+        // Center window at cursor
+        let windowOrigin = NSPoint(
+            x: mouseLocation.x - windowSize / 2,
+            y: mouseLocation.y - windowSize / 2
+        )
+        
+        let windowFrame = NSRect(
+            x: windowOrigin.x,
+            y: windowOrigin.y,
+            width: windowSize,
+            height: windowSize
+        )
+        
+        print("📐 Creating window at frame: \(windowFrame)")
 
         let contentView = ContentView(
             apps: apps,
-            position: position,
+            position: CGPoint(x: windowSize / 2, y: windowSize / 2), // Center at window center
             radius: radius,
             showNames: store.showNames,
-            iconSize: CGFloat(store.iconSize)
+            iconSize: iconSize
         )
         let hostingController = NSHostingController(rootView: contentView)
 
-        let screenFrame = NSScreen.main?.frame ?? .zero
-        let panel = NSPanel(contentRect: screenFrame,
-                            styleMask: [.borderless, .nonactivatingPanel],
-                            backing: .buffered,
-                            defer: false)
+        print("🎨 Creating NSWindow...")
+        let window = NSWindow(
+            contentRect: windowFrame,
+            styleMask: [.borderless],
+            backing: .buffered,
+            defer: false
+        )
+        window.contentViewController = hostingController
+        window.backgroundColor = .clear
+        window.isOpaque = false
+        window.hasShadow = false
+        window.ignoresMouseEvents = false
+        window.level = .screenSaver
+        window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary, .ignoresCycle]
+        window.hidesOnDeactivate = false
+        window.isMovableByWindowBackground = false
+        window.isReleasedWhenClosed = false
 
-        panel.isOpaque = false
-        panel.backgroundColor = .clear
-        panel.hasShadow = false
-        panel.ignoresMouseEvents = false
-        panel.level = .screenSaver
-        panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
-        panel.hidesOnDeactivate = false
-        panel.contentViewController = hostingController
-        panel.orderFrontRegardless()
-
-        self.panel = panel
+        // Activate app BEFORE showing window
+        NSApp.activate(ignoringOtherApps: true)
+        
+        // Show window
+        window.setFrame(windowFrame, display: true)
+        window.orderFrontRegardless()
+        window.makeKey()
+        
+        self.window = window
+        self.isShowing = true
+        print("✅ Window shown with level: \(window.level.rawValue) and frame: \(window.frame)")
     }
 
     func hideLauncher() {
-        panel?.close()
-        panel = nil
+        print("🔄 Hiding launcher...")
+        window?.close()
+        window = nil
+        isShowing = false
+        print("✅ Launcher hidden")
     }
 
     private func getMousePosition() -> CGPoint {

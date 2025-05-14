@@ -5,22 +5,20 @@ class SettingsStore: ObservableObject {
     @AppStorage("showNames") var showNames: Bool = false
     @AppStorage("iconSize") var iconSize: Double = 48
     @AppStorage("ringRadius") var ringRadius: Double = 160
-    @AppStorage("launchAtLogin") var launchAtLogin: Bool = false {
-        didSet {
-            LoginItemManager.enableLaunchAtLogin(launchAtLogin)
-        }
-    }
 
     @Published var selectedAppPaths: [String] = []
 
     private let appPathsKey = "selectedAppPaths"
 
     var computedRadius: Double {
-        return 160 // fixed radius for all sizes (can be dynamic if needed)
+        return ringRadius // Use the stored ring radius
     }
 
     init() {
         loadSelectedApps()
+        if selectedAppPaths.isEmpty {
+            loadDefaultApps()
+        }
     }
 
     func loadSelectedApps() {
@@ -42,6 +40,22 @@ class SettingsStore: ObservableObject {
             selectedAppPaths.remove(at: index)
         } else {
             selectedAppPaths.append(path)
+        }
+        saveSelectedApps()
+    }
+
+    private func loadDefaultApps() {
+        let defaultApps = [
+            "/Applications/Safari.app",
+            "/Applications/Mail.app",
+            "/Applications/Notes.app",
+            "/Applications/Calendar.app"
+        ]
+        
+        for appPath in defaultApps {
+            if FileManager.default.fileExists(atPath: appPath) {
+                selectedAppPaths.append(appPath)
+            }
         }
         saveSelectedApps()
     }
