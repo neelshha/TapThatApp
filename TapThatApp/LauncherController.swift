@@ -21,7 +21,7 @@ class LauncherController {
             print("🔼 Option + Space released")
             // Only hide if we're actually showing
             if self?.isShowing == true {
-                self?.hideLauncher()
+            self?.hideLauncher()
             }
         }
     }
@@ -93,7 +93,7 @@ class LauncherController {
         let window = NSWindow(
             contentRect: windowFrame,
             styleMask: [.borderless],
-            backing: .buffered,
+                            backing: .buffered,
             defer: false
         )
         window.contentViewController = hostingController
@@ -114,7 +114,7 @@ class LauncherController {
         window.setFrame(windowFrame, display: true)
         window.orderFrontRegardless()
         window.makeKey()
-        
+
         self.window = window
         self.isShowing = true
         print("✅ Window shown with level: \(window.level.rawValue) and frame: \(window.frame)")

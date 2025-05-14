@@ -97,12 +97,12 @@ struct SettingsView: View {
                             .font(.headline)
                             .foregroundColor(.primary)
                         
-                        Picker(selection: $store.iconSize, label: Text("")) {
-                            ForEach(sizeOptions, id: \.size) { option in
-                                Text(option.label).tag(option.size)
+                            Picker(selection: $store.iconSize, label: Text("")) {
+                                ForEach(sizeOptions, id: \.size) { option in
+                                    Text(option.label).tag(option.size)
+                                }
                             }
-                        }
-                        .pickerStyle(.segmented)
+                            .pickerStyle(.segmented)
                         .labelsHidden()
                     }
                     .padding(20)
