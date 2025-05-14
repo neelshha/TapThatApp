@@ -39,15 +39,6 @@ struct ContentView: View {
         let ringThickness = max(iconSize * 1.5, 48)
         let dynamicRadius = minRadius + ringThickness * 0.25
 
-//        var labelWidth: CGFloat = 140
-//        if let hovered = hoveredIndex, apps.indices.contains(hovered) {
-//            let label = apps[hovered].name as NSString
-//            let font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
-//            let attributes = [NSAttributedString.Key.font: font]
-//            labelWidth = label.size(withAttributes: attributes).width + 48
-//        }
-//        let minInnerRadius: CGFloat = max(labelWidth / 2 + 48, 160)
-
         // --- Views ---
         return ZStack {
             // Donut-shaped background (dark, minimal thickness)

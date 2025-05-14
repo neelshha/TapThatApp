@@ -87,7 +87,6 @@ open TapThatApp.xcodeproj
   - `KeyEventHandling.swift` - Manages keyboard shortcuts
   - `OverlayPanel.swift` - Overlay panel implementation
   - `SettingsStore.swift` - Manages application settings
-  - `LoginItemManager.swift` - Handles launch at login functionality
   - `LauncherController.swift` - Controls application launching
  
 

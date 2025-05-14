@@ -27,6 +27,7 @@ class LauncherController {
     }
 
     func showLauncher() {
+        store.loadSelectedApps() // Always reload latest apps from UserDefaults
         if window != nil { 
             print("⚠️ Window already exists, returning")
             return 
