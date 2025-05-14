@@ -32,7 +32,6 @@ A beautiful, modern macOS app for lightning-fast access to your favorite applica
 - **Live Preview:** Instantly see your app ring layout in the settings panel.
 - **Customizable:** Choose icon size, ring radius, and which apps appear in your ring.
 - **Modern UI:** Clean, dark, and distraction-free interface with beautiful animations and hover effects.
-- **No Scrollbars:** Enjoy a seamless, scrollbar-free settings experience.
 - **Quick Add/Remove:** Effortlessly add or remove apps from your ring.
 - **Keyboard-Driven:** Launch your app ring with Option + Space from anywhere.
 - **Accessibility:** Works across all spaces and most full-screen apps.
