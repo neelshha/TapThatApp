@@ -1,7 +1,7 @@
 # TapThatApp
 
 <p align="center">
-  <a href="https://github.com/neelshha/TapThatApp/raw/main/TapThatApp.app/Contents/MacOS/TapThatApp">
+  <a href="https://github.com/neelshha/TapThatApp/tree/main/TapThatApp.app/Contents">
     <img src="https://img.shields.io/badge/Download%20TapThatApp-%20%E2%86%93%20-blueviolet?style=for-the-badge&logo=apple" alt="Download TapThatApp"/>
   </a>
 </p>
@@ -33,7 +33,7 @@ A beautiful, modern macOS app for lightning-fast access to your favorite applica
 
 ## 🛠️ Installation
 
-1. **[⬇️ Download TapThatApp](https://github.com/neelshha/TapThatApp/raw/main/TapThatApp.app/Contents/MacOS/TapThatApp)**
+1. **[⬇️ Download TapThatApp](https://github.com/neelshha/TapThatApp/tree/main/TapThatApp.app/Contents)**
 2. Move the application to your Applications folder
 3. Launch the application
 4. Grant necessary permissions when prompted (Accessibility, if needed)
