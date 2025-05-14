@@ -1,35 +1,57 @@
 # TapThatApp
 
-A macOS application that provides quick access to your favorite applications through keyboard shortcuts and an overlay panel.
+<p align="center">
+  <a href="file:///Users/neelshah/Downloads/TapThatApp/TapThatApp.app">
+    <img src="https://img.shields.io/badge/Download%20TapThatApp-%20%E2%86%93%20-blueviolet?style=for-the-badge&logo=apple" alt="Download TapThatApp"/>
+  </a>
+</p>
 
-## Features
+A beautiful, modern macOS app for lightning-fast access to your favorite applications—right from your keyboard.
 
-- Quick access to pinned applications
-- Customizable keyboard shortcuts
-- Overlay panel for easy navigation
-- Launch at login option
-- Modern SwiftUI interface
+---
 
-## Requirements
+## ✨ Features
 
-- Xcode 13.0 or later
+- **Radial App Ring:** Gorgeous, animated ring of your favorite apps, centered on your cursor with a single shortcut.
+- **Live Preview:** Instantly see your app ring layout in the settings panel.
+- **Customizable:** Choose icon size, ring radius, and which apps appear in your ring.
+- **Modern UI:** Clean, dark, and distraction-free interface with beautiful animations and hover effects.
+- **No Scrollbars:** Enjoy a seamless, scrollbar-free settings experience.
+- **Quick Add/Remove:** Effortlessly add or remove apps from your ring.
+- **Keyboard-Driven:** Launch your app ring with Option + Space from anywhere.
+- **Accessibility:** Works across all spaces and most full-screen apps.
+- **SwiftUI-Powered:** Built with the latest Apple technologies for performance and beauty.
+
+---
+
+## 🚀 Requirements
+
+- macOS 13.0 or later (Sonoma recommended for best experience)
 - Swift 5.5 or later
 
-## Installation
+---
 
-1. Download the latest release from the releases page
+## 🛠️ Installation
+
+1. **[⬇️ Download TapThatApp](file:///Users/neelshah/Downloads/TapThatApp/TapThatApp.app)**
 2. Move the application to your Applications folder
 3. Launch the application
-4. Grant necessary permissions when prompted
+4. Grant necessary permissions when prompted (Accessibility, if needed)
 
-## Usage
+---
+
+## 🧑‍💻 Usage
 
 1. Open TapThatApp
-2. Configure your pinned applications in the settings
-3. Set up your preferred keyboard shortcuts
-4. Use the configured shortcuts to quickly access your applications
+2. Click the menu bar icon to open settings
+3. Add your favorite apps to the ring
+4. Adjust icon size and ring radius to your liking
+5. Press <kbd>Option</kbd> + <kbd>Space</kbd> to summon the ring at your cursor—anywhere, anytime!
+6. Hover for beautiful animations and launch apps instantly
 
-## Development
+---
+
+## 🏗️ Development
 
 ### Building from Source
 
@@ -37,21 +59,18 @@ A macOS application that provides quick access to your favorite applications thr
 ```bash
 git clone https://github.com/neelshha/TapThatApp.git
 ```
-
 2. Open the project in Xcode:
 ```bash
 cd TapThatApp
 open TapThatApp.xcodeproj
 ```
-
 3. Build and run the project (⌘R)
 
 ### Project Structure
-
 - `TapThatApp/` - Main application directory
   - `TapThatAppApp.swift` - Application entry point
-  - `ContentView.swift` - Main view
-  - `SettingsView.swift` - Settings interface
+  - `ContentView.swift` - Main view (radial ring logic)
+  - `SettingsView.swift` - Settings interface (live preview, customization)
   - `PinnedAppLoader.swift` - Handles loading of pinned applications
   - `KeyEventHandling.swift` - Manages keyboard shortcuts
   - `OverlayPanel.swift` - Overlay panel implementation
@@ -59,7 +78,9 @@ open TapThatApp.xcodeproj
   - `LoginItemManager.swift` - Handles launch at login functionality
   - `LauncherController.swift` - Controls application launching
 
-## Contributing
+---
+
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
@@ -67,11 +88,15 @@ open TapThatApp.xcodeproj
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## License
+---
+
+## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgments
+---
+
+## 🙏 Acknowledgments
 
 - Built with SwiftUI
 - Uses modern macOS APIs for system integration 
