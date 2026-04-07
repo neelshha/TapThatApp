@@ -1,5 +1,5 @@
-import SwiftUI
 import AppKit
+import SwiftUI
 
 @main
 struct TapThatAppLauncherApp: App {
@@ -9,7 +9,7 @@ struct TapThatAppLauncherApp: App {
 
     var body: some Scene {
         WindowGroup {
-            EmptyView() // Invisible UI
+            EmptyView()
         }
     }
 
@@ -25,27 +25,41 @@ struct TapThatAppLauncherApp: App {
             return
         }
 
-        #if DEBUG
-        let path = "\(NSHomeDirectory())/Library/Developer/Xcode/DerivedData/TapThatApp-*/Build/Products/Debug/TapThatApp.app"
-        #else
-        let path = "/Applications/TapThatApp.app"
-        #endif
+        let mainAppURL = resolveMainApplicationURL()
 
-        let url = URL(fileURLWithPath: path)
         let config = NSWorkspace.OpenConfiguration()
         config.activates = true
 
-        NSWorkspace.shared.openApplication(at: url, configuration: config) { app, error in
-            if let error = error {
-                print("❌ Failed to launch TapThatApp: \(error.localizedDescription)")
-            } else {
-                print("✅ TapThatApp launched successfully.")
+        NSWorkspace.shared.openApplication(at: mainAppURL, configuration: config) { _, error in
+            if let error {
+                print("Failed to launch TapThatApp: \(error.localizedDescription)")
             }
-
-            // Always terminate the helper
             DispatchQueue.main.async {
                 NSApp.terminate(nil)
             }
         }
+    }
+
+    /// When embedded in `TapThatApp.app/Contents/Library/LoginItems/`, the host app is three levels above the helper bundle.
+    private func resolveMainApplicationURL() -> URL {
+        let launcherBundle = Bundle.main.bundleURL
+
+        if launcherBundle.pathComponents.contains("LoginItems") {
+            return launcherBundle
+                .deletingLastPathComponent()
+                .deletingLastPathComponent()
+                .deletingLastPathComponent()
+        }
+
+        #if DEBUG
+        let sibling = launcherBundle
+            .deletingLastPathComponent()
+            .appendingPathComponent("TapThatApp.app", isDirectory: true)
+        if FileManager.default.fileExists(atPath: sibling.path) {
+            return sibling
+        }
+        #endif
+
+        return URL(fileURLWithPath: "/Applications/TapThatApp.app", isDirectory: true)
     }
 }

@@ -6,7 +6,7 @@ struct AppIcon: Identifiable {
     let id = UUID()
     let name: String
     let icon: NSImage
-    let path: String
+    let url: URL
 }
 
 struct ContentView: View {
@@ -15,6 +15,7 @@ struct ContentView: View {
     let radius: CGFloat
     let showNames: Bool
     let iconSize: CGFloat
+    var allowsAppLaunch: Bool = true
 
     @State private var selectedIndex: Int = 0
     @State private var hoveredIndex: Int?
@@ -63,13 +64,17 @@ struct ContentView: View {
                         .interpolation(.high)
                         .aspectRatio(contentMode: .fit)
                         .frame(width: iconSize, height: iconSize)
+                        .accessibilityLabel(app.name)
+                        .accessibilityHint(allowsAppLaunch ? "Press Return or click to open this app." : "")
+                        .accessibilityAddTraits(allowsAppLaunch ? .isButton : [])
                         .scaleEffect(iconScales[app.id] ?? 1.0)
                         .rotationEffect(.degrees(iconRotations[app.id] ?? 0))
-                        .shadow(color: hoveredIndex == index ? Color.accentColor.opacity(0.45) : Color.black.opacity(0.13), 
+                        .shadow(color: hoveredIndex == index ? Color.accentColor.opacity(0.45) : Color.black.opacity(0.13),
                                radius: hoveredIndex == index ? 14 : 4, x: 0, y: 2)
                         .scaleEffect(ringScale)
                         .opacity(ringOpacity)
                         .onTapGesture {
+                            guard allowsAppLaunch else { return }
                             withAnimation(.easeInOut(duration: 0.15)) {
                                 iconScales[app.id] = clickScale
                                 iconRotations[app.id] = clickRotation
@@ -79,7 +84,7 @@ struct ContentView: View {
                                     iconScales[app.id] = 1.0
                                     iconRotations[app.id] = 0
                                 }
-                                launchApp(at: app.path)
+                                launchApp(at: app.url)
                             }
                         }
                         .onHover { hovering in
@@ -108,27 +113,30 @@ struct ContentView: View {
                 )
             }
 
-            // Central label for hovered app
-            if let hovered = hoveredIndex, apps.indices.contains(hovered) {
+            // Central label for hovered app (toggle in Settings)
+            if showNames, let hovered = hoveredIndex, apps.indices.contains(hovered) {
                 let app = apps[hovered]
-                
+
                 Text(app.name)
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(.white)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.primary)
+                    .lineLimit(1)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 6)
-                    .background(
+                    .background {
                         Capsule()
-                            .fill(Color(.sRGB, white: 0.13, opacity: 1.0))
-                            .shadow(color: Color.black.opacity(0.18), radius: 1, x: 0, y: 2)
-                    )
-                    .overlay(
+                            .fill(.ultraThinMaterial)
+                            .shadow(color: .black.opacity(0.15), radius: 4, x: 0, y: 1)
+                    }
+                    .overlay {
                         Capsule()
-                            .stroke(Color(.sRGB, white: 0.25, opacity: 1.0), lineWidth: 2)
-                    )
+                            .strokeBorder(.quaternary.opacity(0.6), lineWidth: 1)
+                    }
+                    .environment(\.colorScheme, .dark)
                     .position(x: position.x, y: position.y)
                     .transition(.opacity)
                     .animation(.easeInOut(duration: 0.15), value: hoveredIndex)
+                    .accessibilityLabel("Selected app: \(app.name)")
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -145,16 +153,17 @@ struct ContentView: View {
             }
         }
         .onKeyDown { event in
+            guard allowsAppLaunch else { return }
             switch event.keyCode {
-            case 123: 
+            case 123:
                 withAnimation(.easeInOut(duration: 0.2)) {
                     selectedIndex = (selectedIndex - 1 + apps.count) % apps.count
                 }
-            case 124: 
+            case 124:
                 withAnimation(.easeInOut(duration: 0.2)) {
                     selectedIndex = (selectedIndex + 1) % apps.count
                 }
-            case 36: 
+            case 36:
                 if let app = apps[safe: selectedIndex] {
                     withAnimation(.easeInOut(duration: 0.15)) {
                         iconScales[app.id] = clickScale
@@ -163,7 +172,7 @@ struct ContentView: View {
                         withAnimation(.easeInOut(duration: 0.2)) {
                             iconScales[app.id] = 1.0
                         }
-                        launchApp(at: app.path)
+                        launchApp(at: app.url)
                     }
                 }
             default: break
@@ -171,8 +180,8 @@ struct ContentView: View {
         }
     }
 
-    private func launchApp(at path: String) {
-        NSWorkspace.shared.open(URL(fileURLWithPath: path))
+    private func launchApp(at url: URL) {
+        NSWorkspace.shared.open(url)
     }
 }
 
@@ -204,8 +213,6 @@ struct RadialSegment: Shape {
 
     func path(in rect: CGRect) -> Path {
         var path = Path()
-//        let start = CGFloat(startAngle.radians)
-//        let end = CGFloat(endAngle.radians)
         let center = self.center
 
         path.addArc(center: center, radius: outerRadius, startAngle: startAngle, endAngle: endAngle, clockwise: false)

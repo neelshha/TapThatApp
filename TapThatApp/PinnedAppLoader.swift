@@ -33,7 +33,7 @@ class PinnedAppLoader {
         return decoded.compactMap { entry in
             let icon = NSWorkspace.shared.icon(forFile: entry.path)
             icon.size = NSSize(width: 48, height: 48)
-            return AppIcon(name: entry.name, icon: icon, path: entry.path)
+            return AppIcon(name: entry.name, icon: icon, url: URL(fileURLWithPath: entry.path))
         }
     }
 
@@ -61,7 +61,7 @@ class PinnedAppLoader {
             let icon = NSWorkspace.shared.icon(forFile: url.path)
             icon.size = NSSize(width: 48, height: 48)
 
-            return AppIcon(name: name, icon: icon, path: url.path)
+            return AppIcon(name: name, icon: icon, url: url)
         }
     }
 }

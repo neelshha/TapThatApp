@@ -32,15 +32,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func setupMenu() {
         let menu = NSMenu()
         menu.autoenablesItems = false
-        let launchItem = NSMenuItem(title: "Launch TapThatApp", action: #selector(triggerLauncher), keyEquivalent: "l")
-        launchItem.image = NSImage(systemSymbolName: "star.fill", accessibilityDescription: nil)?.withSymbolConfiguration(NSImage.SymbolConfiguration(pointSize: 14, weight: .medium))
+        let launchItem = NSMenuItem(title: "Show App Ring", action: #selector(triggerLauncher), keyEquivalent: "l")
+        launchItem.image = NSImage(systemSymbolName: "circle.grid.cross", accessibilityDescription: nil)?.withSymbolConfiguration(NSImage.SymbolConfiguration(pointSize: 14, weight: .medium))
         menu.addItem(launchItem)
         let settingsItem = NSMenuItem(title: "Settings", action: #selector(toggleSettingsWindow), keyEquivalent: ",")
-        settingsItem.image = NSImage(systemSymbolName: "gear", accessibilityDescription: nil)?.withSymbolConfiguration(NSImage.SymbolConfiguration(pointSize: 14, weight: .medium))
+        settingsItem.image = NSImage(systemSymbolName: "gearshape", accessibilityDescription: nil)?.withSymbolConfiguration(NSImage.SymbolConfiguration(pointSize: 14, weight: .medium))
         menu.addItem(settingsItem)
         menu.addItem(NSMenuItem.separator())
         let quitItem = NSMenuItem(title: "Quit TapThatApp", action: #selector(quitApp), keyEquivalent: "q")
-        quitItem.image = NSImage(systemSymbolName: "power", accessibilityDescription: nil)?.withSymbolConfiguration(NSImage.SymbolConfiguration(pointSize: 14, weight: .medium))
         menu.addItem(quitItem)
         statusItem.menu = menu
     }
@@ -58,12 +57,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let hostingController = NSHostingController(rootView: settingsView)
             let window = NSWindow(contentViewController: hostingController)
             window.title = "TapThatApp Settings"
-            window.styleMask = [.titled, .closable, .miniaturizable]
-            window.setContentSize(NSSize(width: 540, height: 740))
+            window.styleMask = [.titled, .closable, .miniaturizable, .resizable]
+            window.setContentSize(NSSize(width: 880, height: 620))
+            window.contentMinSize = NSSize(width: 760, height: 520)
             window.center()
             window.isReleasedWhenClosed = false
             window.backgroundColor = .windowBackgroundColor
-            window.appearance = NSAppearance(named: .darkAqua)
+            window.titlebarAppearsTransparent = false
             settingsWindow = window
         }
         settingsWindow?.makeKeyAndOrderFront(nil)
