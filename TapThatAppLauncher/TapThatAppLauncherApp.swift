@@ -2,7 +2,7 @@ import AppKit
 import SwiftUI
 
 @main
-struct TapThatAppLauncherApp: App {
+struct TapHaloLauncherApp: App {
     init() {
         launchMainAppIfNeeded()
     }
@@ -14,7 +14,7 @@ struct TapThatAppLauncherApp: App {
     }
 
     private func launchMainAppIfNeeded() {
-        let mainAppBundleID = "com.neelshha.TapThatApp"
+        let mainAppBundleID = "com.neelshha.TapHalo"
 
         let isRunning = NSWorkspace.shared.runningApplications.contains {
             $0.bundleIdentifier == mainAppBundleID
@@ -32,7 +32,7 @@ struct TapThatAppLauncherApp: App {
 
         NSWorkspace.shared.openApplication(at: mainAppURL, configuration: config) { _, error in
             if let error {
-                print("Failed to launch TapThatApp: \(error.localizedDescription)")
+                print("Failed to launch TapHalo: \(error.localizedDescription)")
             }
             DispatchQueue.main.async {
                 NSApp.terminate(nil)
@@ -40,7 +40,7 @@ struct TapThatAppLauncherApp: App {
         }
     }
 
-    /// When embedded in `TapThatApp.app/Contents/Library/LoginItems/`, the host app is three levels above the helper bundle.
+    /// When embedded in `TapHalo.app/Contents/Library/LoginItems/`, the host app is three levels above the helper bundle.
     private func resolveMainApplicationURL() -> URL {
         let launcherBundle = Bundle.main.bundleURL
 
@@ -54,12 +54,12 @@ struct TapThatAppLauncherApp: App {
         #if DEBUG
         let sibling = launcherBundle
             .deletingLastPathComponent()
-            .appendingPathComponent("TapThatApp.app", isDirectory: true)
+            .appendingPathComponent("TapHalo.app", isDirectory: true)
         if FileManager.default.fileExists(atPath: sibling.path) {
             return sibling
         }
         #endif
 
-        return URL(fileURLWithPath: "/Applications/TapThatApp.app", isDirectory: true)
+        return URL(fileURLWithPath: "/Applications/TapHalo.app", isDirectory: true)
     }
 }

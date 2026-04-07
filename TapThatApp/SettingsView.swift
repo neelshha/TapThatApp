@@ -54,7 +54,7 @@ struct SettingsView: View {
                     } header: {
                         Text("Open at Login")
                     } footer: {
-                        Text("If macOS asks you to approve the login item, choose TapThatApp in System Settings → General → Login Items & Extensions.")
+                        Text("If macOS asks you to approve the login item, choose TapHalo in System Settings → General → Login Items & Extensions.")
                     }
                 }
 
@@ -94,7 +94,7 @@ struct SettingsView: View {
                 } header: {
                     Text("Apps in Ring")
                 } footer: {
-                    Text("Apps must be added here so TapThatApp can open them under macOS security rules.")
+                    Text("Apps must be added here so TapHalo can open them under macOS security rules.")
                 }
             }
             .formStyle(.grouped)
@@ -198,14 +198,14 @@ struct SettingsView: View {
 
 @available(macOS 13.0, *)
 private struct OpenAtLoginSection: View {
-    private let loginItemIdentifier = "com.neelshha.TapThatAppLauncher"
+    private let loginItemIdentifier = "com.neelshha.TapHaloLauncher"
 
     @State private var openAtLogin = false
     @State private var statusMessage: String?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Toggle("Open TapThatApp at login", isOn: Binding(
+            Toggle("Open TapHalo at login", isOn: Binding(
                 get: { openAtLogin },
                 set: { newValue in
                     Task { await setLoginItem(enabled: newValue) }
@@ -228,7 +228,7 @@ private struct OpenAtLoginSection: View {
         let status = SMAppService.loginItem(identifier: loginItemIdentifier).status
         openAtLogin = (status == .enabled)
         if status == .requiresApproval {
-            statusMessage = "Turn on TapThatApp under Login Items in System Settings."
+            statusMessage = "Turn on TapHalo under Login Items in System Settings."
         } else {
             statusMessage = nil
         }

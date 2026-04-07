@@ -11,13 +11,19 @@ class PinnedAppLoader {
 
     static func configFileURL() -> URL {
         let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-        let cmdpopFolder = appSupport.appendingPathComponent("CmdPop", isDirectory: true)
+        let haloFolder = appSupport.appendingPathComponent("TapHalo", isDirectory: true)
+        let legacyFolder = appSupport.appendingPathComponent("CmdPop", isDirectory: true)
+        let legacyFile = legacyFolder.appendingPathComponent(fileName)
+        let newFile = haloFolder.appendingPathComponent(fileName)
 
-        if !FileManager.default.fileExists(atPath: cmdpopFolder.path) {
-            try? FileManager.default.createDirectory(at: cmdpopFolder, withIntermediateDirectories: true)
+        if !FileManager.default.fileExists(atPath: haloFolder.path) {
+            try? FileManager.default.createDirectory(at: haloFolder, withIntermediateDirectories: true)
+        }
+        if !FileManager.default.fileExists(atPath: newFile.path), FileManager.default.fileExists(atPath: legacyFile.path) {
+            try? FileManager.default.moveItem(at: legacyFile, to: newFile)
         }
 
-        return cmdpopFolder.appendingPathComponent(fileName)
+        return newFile
     }
 
     static func loadPinnedApps() -> [AppIcon] {
@@ -26,7 +32,7 @@ class PinnedAppLoader {
         guard let data = try? Data(contentsOf: url),
               let decoded = try? JSONDecoder().decode([PinnedAppConfig].self, from: data) else {
             let fallback = fetchDefaultApps()
-            savePinnedApps(fallback.map { PinnedAppConfig(name: $0.name, path: $0.path) })
+            savePinnedApps(fallback.map { PinnedAppConfig(name: $0.name, path: $0.url.path) })
             return fallback
         }
 

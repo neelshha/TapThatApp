@@ -26,7 +26,7 @@
 
 /* Begin PBXFileReference section */
 		0F7CD6D22DCF147000BC3750 /* TapHalo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapHalo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0F7CD6FC2DCF155700BC3750 /* TapThatAppLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapThatAppLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F7CD6FC2DCF155700BC3750 /* TapHaloLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapHaloLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA0012DCF147000BC001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FA0012DCF147000BC002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8FA0012DCF147000BC003 /* KeyEventHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEventHandling.swift; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				0F7CD6D22DCF147000BC3750 /* TapHalo.app */,
-				0F7CD6FC2DCF155700BC3750 /* TapThatAppLauncher.app */,
+				0F7CD6FC2DCF155700BC3750 /* TapHaloLauncher.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -151,7 +151,7 @@
 			packageProductDependencies = (
 			);
 			productName = TapThatAppLauncher;
-			productReference = 0F7CD6FC2DCF155700BC3750 /* TapThatAppLauncher.app */;
+			productReference = 0F7CD6FC2DCF155700BC3750 /* TapHaloLauncher.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -376,9 +376,10 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = TapHalo;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSUIElement = YES;
-				INFOPLIST_KEY_NSAccessibilityUsageDescription = "TapThatApp registers Option-Space as a global shortcut and shows your app ring on screen.";
+				INFOPLIST_KEY_NSAccessibilityUsageDescription = "TapHalo registers Option-Space as a global shortcut and shows your app ring on screen.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -386,7 +387,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.neelshha.TapThatApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.neelshha.TapHalo;
 				PRODUCT_NAME = TapHalo;
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -409,9 +410,10 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = TapHalo;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSUIElement = YES;
-				INFOPLIST_KEY_NSAccessibilityUsageDescription = "TapThatApp registers Option-Space as a global shortcut and shows your app ring on screen.";
+				INFOPLIST_KEY_NSAccessibilityUsageDescription = "TapHalo registers Option-Space as a global shortcut and shows your app ring on screen.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -419,7 +421,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.neelshha.TapThatApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.neelshha.TapHalo;
 				PRODUCT_NAME = TapHalo;
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -441,6 +443,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = TapHalo;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -450,8 +453,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.neelshha.TapThatAppLauncher;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.neelshha.TapHaloLauncher;
+				PRODUCT_NAME = TapHaloLauncher;
 				REGISTER_APP_GROUPS = YES;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -473,6 +476,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = TapHalo;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -482,8 +486,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.neelshha.TapThatAppLauncher;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.neelshha.TapHaloLauncher;
+				PRODUCT_NAME = TapHaloLauncher;
 				REGISTER_APP_GROUPS = YES;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
