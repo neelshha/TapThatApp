@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 
 struct KeyDownModifier: ViewModifier {
@@ -10,22 +11,56 @@ struct KeyDownModifier: ViewModifier {
     struct KeyboardView: NSViewRepresentable {
         let perform: (NSEvent) -> Void
 
+        func makeCoordinator() -> Coordinator {
+            Coordinator(perform: perform)
+        }
+
+        final class Coordinator {
+            var perform: (NSEvent) -> Void
+            var monitor: Any?
+
+            init(perform: @escaping (NSEvent) -> Void) {
+                self.perform = perform
+            }
+
+            deinit {
+                removeMonitorIfNeeded()
+            }
+
+            func removeMonitorIfNeeded() {
+                if let monitor {
+                    NSEvent.removeMonitor(monitor)
+                    self.monitor = nil
+                }
+            }
+        }
+
         func makeNSView(context: Context) -> NSView {
             let view = NSView()
-            view.window?.makeFirstResponder(view)
-            NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
-                perform($0)
+            let coordinator = context.coordinator
+            coordinator.removeMonitorIfNeeded()
+            coordinator.monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
+                coordinator.perform(event)
                 return nil
+            }
+            DispatchQueue.main.async {
+                view.window?.makeFirstResponder(view)
             }
             return view
         }
 
-        func updateNSView(_ nsView: NSView, context: Context) {}
+        func updateNSView(_ nsView: NSView, context: Context) {
+            context.coordinator.perform = perform
+        }
+
+        static func dismantleNSView(_ nsView: NSView, coordinator: Coordinator) {
+            coordinator.removeMonitorIfNeeded()
+        }
     }
 }
 
 extension View {
     func onKeyDown(perform: @escaping (NSEvent) -> Void) -> some View {
-        self.modifier(KeyDownModifier(perform: perform))
+        modifier(KeyDownModifier(perform: perform))
     }
 }

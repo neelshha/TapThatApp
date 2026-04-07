@@ -16,6 +16,8 @@ struct ContentView: View {
     let showNames: Bool
     let iconSize: CGFloat
     var allowsAppLaunch: Bool = true
+    /// Called when the ring should close (Escape, or after opening an app from the ring).
+    var onDismiss: (() -> Void)? = nil
 
     @State private var selectedIndex: Int = 0
     @State private var hoveredIndex: Int?
@@ -85,6 +87,7 @@ struct ContentView: View {
                                     iconRotations[app.id] = 0
                                 }
                                 launchApp(at: app.url)
+                                onDismiss?()
                             }
                         }
                         .onHover { hovering in
@@ -153,7 +156,11 @@ struct ContentView: View {
             }
         }
         .onKeyDown { event in
-            guard allowsAppLaunch else { return }
+            if event.keyCode == 53 {
+                onDismiss?()
+                return
+            }
+            guard allowsAppLaunch, !apps.isEmpty else { return }
             switch event.keyCode {
             case 123:
                 withAnimation(.easeInOut(duration: 0.2)) {
@@ -173,6 +180,7 @@ struct ContentView: View {
                             iconScales[app.id] = 1.0
                         }
                         launchApp(at: app.url)
+                        onDismiss?()
                     }
                 }
             default: break

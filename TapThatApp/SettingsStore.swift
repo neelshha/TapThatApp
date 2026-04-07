@@ -28,6 +28,35 @@ class SettingsStore: ObservableObject {
             bookmarkDataList = []
             migrateLegacyPathsIfNeeded()
         }
+        pruneStaleBookmarks()
+    }
+
+    /// Removes bookmark data that no longer resolves or points at a missing app (e.g. app moved or deleted).
+    private func pruneStaleBookmarks() {
+        var valid: [Data] = []
+        for data in bookmarkDataList {
+            do {
+                var stale = false
+                let url = try URL(
+                    resolvingBookmarkData: data,
+                    options: [.withSecurityScope, .withoutUI],
+                    relativeTo: nil,
+                    bookmarkDataIsStale: &stale
+                )
+                if stale { continue }
+                guard url.startAccessingSecurityScopedResource() else { continue }
+                defer { url.stopAccessingSecurityScopedResource() }
+                if FileManager.default.fileExists(atPath: url.path) {
+                    valid.append(data)
+                }
+            } catch {
+                continue
+            }
+        }
+        if valid.count != bookmarkDataList.count {
+            bookmarkDataList = valid
+            persistBookmarks()
+        }
     }
 
     /// Plain paths from pre–App Store builds do not work under sandbox; clear legacy storage.

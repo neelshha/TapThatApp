@@ -5,11 +5,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var statusItem: NSStatusItem!
     var settingsWindow: NSWindow?
     var launcher: LauncherController?
+    /// Shared with settings UI and launcher so bookmarks and @AppStorage stay in sync.
+    let settingsStore = SettingsStore()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.regular)
         setupStatusBar()
-        launcher = LauncherController()
+        launcher = LauncherController(store: settingsStore)
         setupMenu()
         NSApp.setActivationPolicy(.accessory)
     }
@@ -52,8 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc private func toggleSettingsWindow() {
         if settingsWindow == nil {
-            let store = SettingsStore()
-            let settingsView = SettingsView(store: store)
+            let settingsView = SettingsView(store: settingsStore)
             let hostingController = NSHostingController(rootView: settingsView)
             let window = NSWindow(contentViewController: hostingController)
             window.title = "TapHalo Settings"

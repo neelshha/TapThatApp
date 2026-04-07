@@ -3,14 +3,24 @@ import Cocoa
 import SwiftUI
 import HotKey
 
+private final class LauncherWindowDelegate: NSObject, NSWindowDelegate {
+    var onWillClose: (() -> Void)?
+
+    func windowWillClose(_ notification: Notification) {
+        onWillClose?()
+    }
+}
+
 class LauncherController {
     private var window: NSWindow?
     private var hotKey: HotKey?
-    private let store = SettingsStore()
+    private let store: SettingsStore
     private var isShowing = false
     private var securityScopedStops: [() -> Void] = []
+    private var windowDelegate: LauncherWindowDelegate?
 
-    init() {
+    init(store: SettingsStore) {
+        self.store = store
         hotKey = HotKey(key: .space, modifiers: [.option])
 
         hotKey?.keyDownHandler = { [weak self] in
@@ -48,8 +58,6 @@ class LauncherController {
         }
 
         let mouseLocation = NSEvent.mouseLocation
-        let screen = NSScreen.main ?? NSScreen.screens[0]
-        _ = screen.frame.height
 
         let radius = CGFloat(store.ringRadius)
         let iconSize = CGFloat(store.iconSize)
@@ -74,7 +82,11 @@ class LauncherController {
             position: CGPoint(x: windowSize / 2, y: windowSize / 2),
             radius: radius,
             showNames: store.showNames,
-            iconSize: iconSize
+            iconSize: iconSize,
+            allowsAppLaunch: true,
+            onDismiss: { [weak self] in
+                self?.hideLauncher()
+            }
         )
         let hostingController = NSHostingController(rootView: contentView)
 
@@ -95,6 +107,13 @@ class LauncherController {
         window.isMovableByWindowBackground = false
         window.isReleasedWhenClosed = false
 
+        let delegate = LauncherWindowDelegate()
+        delegate.onWillClose = { [weak self] in
+            self?.handleWindowClosedWithoutHideCall()
+        }
+        window.delegate = delegate
+        windowDelegate = delegate
+
         NSApp.activate(ignoringOtherApps: true)
 
         window.setFrame(windowFrame, display: true)
@@ -105,7 +124,17 @@ class LauncherController {
         self.isShowing = true
     }
 
+    /// Releases security-scoped access when the window is closed by any path (red button, etc.).
+    private func handleWindowClosedWithoutHideCall() {
+        window = nil
+        isShowing = false
+        windowDelegate = nil
+        releaseSecurityScopedURLs()
+    }
+
     func hideLauncher() {
+        windowDelegate = nil
+        window?.delegate = nil
         window?.close()
         window = nil
         isShowing = false
