@@ -25,7 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0F7CD6D22DCF147000BC3750 /* TapThatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapThatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F7CD6D22DCF147000BC3750 /* TapHalo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapHalo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F7CD6FC2DCF155700BC3750 /* TapThatAppLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapThatAppLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA0012DCF147000BC001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FA0012DCF147000BC002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,13 +36,13 @@
 		8FA0012DCF147000BC007 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		8FA0012DCF147000BC008 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8FA0012DCF147000BC009 /* TapThatAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapThatAppApp.swift; sourceTree = "<group>"; };
-		8FA0012DCF147000BC00C /* TapThatApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TapThatApp.entitlements; sourceTree = "<group>"; };
 		8FA0012DCF147000BC00A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8FA0012DCF147000BC00B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		8FA0012DCF147000BC00C /* TapThatApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TapThatApp.entitlements; sourceTree = "<group>"; };
 		8FA0022DCF147000BC001 /* TapThatAppLauncherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapThatAppLauncherApp.swift; sourceTree = "<group>"; };
-		8FA0022DCF147000BC004 /* TapThatAppLauncher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TapThatAppLauncher.entitlements; sourceTree = "<group>"; };
 		8FA0022DCF147000BC002 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8FA0022DCF147000BC003 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		8FA0022DCF147000BC004 /* TapThatAppLauncher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TapThatAppLauncher.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +76,7 @@
 		0F7CD6D32DCF147000BC3750 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0F7CD6D22DCF147000BC3750 /* TapThatApp.app */,
+				0F7CD6D22DCF147000BC3750 /* TapHalo.app */,
 				0F7CD6FC2DCF155700BC3750 /* TapThatAppLauncher.app */,
 			);
 			name = Products;
@@ -132,7 +132,7 @@
 				0F7CD6F62DCF150200BC3750 /* HotKey */,
 			);
 			productName = TapThatApp;
-			productReference = 0F7CD6D22DCF147000BC3750 /* TapThatApp.app */;
+			productReference = 0F7CD6D22DCF147000BC3750 /* TapHalo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0F7CD6FB2DCF155700BC3750 /* TapThatAppLauncher */ = {
@@ -368,6 +368,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = TapThatApp/TapThatApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -386,7 +387,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.neelshha.TapThatApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TapHalo;
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -400,6 +401,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = TapThatApp/TapThatApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -418,7 +420,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.neelshha.TapThatApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TapHalo;
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
