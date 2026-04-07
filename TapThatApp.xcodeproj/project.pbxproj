@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0F7CD6F72DCF150200BC3750 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = 0F7CD6F62DCF150200BC3750 /* HotKey */; };
-		0F7CD7102DCF160000BC3751 /* TapThatAppLauncher.app in Embed Login Item */ = {isa = PBXBuildFile; fileRef = 0F7CD6FC2DCF155700BC3750 /* TapThatAppLauncher.app */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8FB0012DCF147000BC001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA0012DCF147000BC001 /* AppDelegate.swift */; };
 		8FB0012DCF147000BC002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA0012DCF147000BC002 /* ContentView.swift */; };
 		8FB0012DCF147000BC003 /* KeyEventHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA0012DCF147000BC003 /* KeyEventHandling.swift */; };
@@ -123,12 +122,10 @@
 				0F7CD6CE2DCF147000BC3750 /* Sources */,
 				0F7CD6CF2DCF147000BC3750 /* Frameworks */,
 				0F7CD6D02DCF147000BC3750 /* Resources */,
-				0F7CD7102DCF160000BC3750 /* Embed Login Item */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0F7CD7152DCF160000BC3750 /* PBXTargetDependency */,
 			);
 			name = TapThatApp;
 			packageProductDependencies = (
@@ -217,20 +214,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		0F7CD7102DCF160000BC3750 /* Embed Login Item */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 18;
-			files = (
-				0F7CD7102DCF160000BC3751 /* TapThatAppLauncher.app in Embed Login Item */,
-			);
-			name = "Embed Login Item";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0F7CD6CE2DCF147000BC3750 /* Sources */ = {
@@ -507,24 +490,6 @@
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
-
-/* Begin PBXContainerItemProxy section */
-		0F7CD7142DCF160000BC3750 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0F7CD6CA2DCF147000BC3750 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0F7CD6FB2DCF155700BC3750;
-			remoteInfo = TapThatAppLauncher;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXTargetDependency section */
-		0F7CD7152DCF160000BC3750 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0F7CD6FB2DCF155700BC3750 /* TapThatAppLauncher */;
-			targetProxy = 0F7CD7142DCF160000BC3750 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCConfigurationList section */
 		0F7CD6CD2DCF147000BC3750 /* Build configuration list for PBXProject "TapThatApp" */ = {
