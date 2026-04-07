@@ -3,31 +3,48 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0F7CD6F72DCF150200BC3750 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = 0F7CD6F62DCF150200BC3750 /* HotKey */; };
 		0F7CD7102DCF160000BC3751 /* TapThatAppLauncher.app in Embed Login Item */ = {isa = PBXBuildFile; fileRef = 0F7CD6FC2DCF155700BC3750 /* TapThatAppLauncher.app */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8FB0012DCF147000BC001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA0012DCF147000BC001 /* AppDelegate.swift */; };
+		8FB0012DCF147000BC002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA0012DCF147000BC002 /* ContentView.swift */; };
+		8FB0012DCF147000BC003 /* KeyEventHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA0012DCF147000BC003 /* KeyEventHandling.swift */; };
+		8FB0012DCF147000BC004 /* LauncherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA0012DCF147000BC004 /* LauncherController.swift */; };
+		8FB0012DCF147000BC005 /* OverlayPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA0012DCF147000BC005 /* OverlayPanel.swift */; };
+		8FB0012DCF147000BC006 /* PinnedAppLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA0012DCF147000BC006 /* PinnedAppLoader.swift */; };
+		8FB0012DCF147000BC007 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA0012DCF147000BC007 /* SettingsStore.swift */; };
+		8FB0012DCF147000BC008 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA0012DCF147000BC008 /* SettingsView.swift */; };
+		8FB0012DCF147000BC009 /* TapThatAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA0012DCF147000BC009 /* TapThatAppApp.swift */; };
+		8FB0012DCF147000BC00A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FA0012DCF147000BC00A /* Assets.xcassets */; };
+		8FB0012DCF147000BC00B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8FA0012DCF147000BC00B /* PrivacyInfo.xcprivacy */; };
+		8FB0022DCF147000BC001 /* TapThatAppLauncherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA0022DCF147000BC001 /* TapThatAppLauncherApp.swift */; };
+		8FB0022DCF147000BC002 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FA0022DCF147000BC002 /* Assets.xcassets */; };
+		8FB0022DCF147000BC003 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8FA0022DCF147000BC003 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0F7CD6D22DCF147000BC3750 /* TapThatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapThatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F7CD6FC2DCF155700BC3750 /* TapThatAppLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapThatAppLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FA0012DCF147000BC001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8FA0012DCF147000BC002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8FA0012DCF147000BC003 /* KeyEventHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEventHandling.swift; sourceTree = "<group>"; };
+		8FA0012DCF147000BC004 /* LauncherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherController.swift; sourceTree = "<group>"; };
+		8FA0012DCF147000BC005 /* OverlayPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayPanel.swift; sourceTree = "<group>"; };
+		8FA0012DCF147000BC006 /* PinnedAppLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedAppLoader.swift; sourceTree = "<group>"; };
+		8FA0012DCF147000BC007 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
+		8FA0012DCF147000BC008 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		8FA0012DCF147000BC009 /* TapThatAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapThatAppApp.swift; sourceTree = "<group>"; };
+		8FA0012DCF147000BC00C /* TapThatApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TapThatApp.entitlements; sourceTree = "<group>"; };
+		8FA0012DCF147000BC00A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8FA0012DCF147000BC00B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		8FA0022DCF147000BC001 /* TapThatAppLauncherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapThatAppLauncherApp.swift; sourceTree = "<group>"; };
+		8FA0022DCF147000BC004 /* TapThatAppLauncher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TapThatAppLauncher.entitlements; sourceTree = "<group>"; };
+		8FA0022DCF147000BC002 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8FA0022DCF147000BC003 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		0F7CD6D42DCF147000BC3750 /* TapThatApp */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = TapThatApp;
-			sourceTree = "<group>";
-		};
-		0F7CD6FD2DCF155700BC3750 /* TapThatAppLauncher */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = TapThatAppLauncher;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		0F7CD6CF2DCF147000BC3750 /* Frameworks */ = {
@@ -51,8 +68,8 @@
 		0F7CD6C92DCF147000BC3750 = {
 			isa = PBXGroup;
 			children = (
-				0F7CD6D42DCF147000BC3750 /* TapThatApp */,
-				0F7CD6FD2DCF155700BC3750 /* TapThatAppLauncher */,
+				8FA0002DCF147000BC001 /* TapThatApp */,
+				8FA0002DCF147000BC002 /* TapThatAppLauncher */,
 				0F7CD6D32DCF147000BC3750 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +81,36 @@
 				0F7CD6FC2DCF155700BC3750 /* TapThatAppLauncher.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8FA0002DCF147000BC001 /* TapThatApp */ = {
+			isa = PBXGroup;
+			children = (
+				8FA0012DCF147000BC001 /* AppDelegate.swift */,
+				8FA0012DCF147000BC002 /* ContentView.swift */,
+				8FA0012DCF147000BC003 /* KeyEventHandling.swift */,
+				8FA0012DCF147000BC004 /* LauncherController.swift */,
+				8FA0012DCF147000BC005 /* OverlayPanel.swift */,
+				8FA0012DCF147000BC006 /* PinnedAppLoader.swift */,
+				8FA0012DCF147000BC007 /* SettingsStore.swift */,
+				8FA0012DCF147000BC008 /* SettingsView.swift */,
+				8FA0012DCF147000BC009 /* TapThatAppApp.swift */,
+				8FA0012DCF147000BC00C /* TapThatApp.entitlements */,
+				8FA0012DCF147000BC00A /* Assets.xcassets */,
+				8FA0012DCF147000BC00B /* PrivacyInfo.xcprivacy */,
+			);
+			path = TapThatApp;
+			sourceTree = "<group>";
+		};
+		8FA0002DCF147000BC002 /* TapThatAppLauncher */ = {
+			isa = PBXGroup;
+			children = (
+				8FA0022DCF147000BC001 /* TapThatAppLauncherApp.swift */,
+				8FA0022DCF147000BC004 /* TapThatAppLauncher.entitlements */,
+				8FA0022DCF147000BC002 /* Assets.xcassets */,
+				8FA0022DCF147000BC003 /* PrivacyInfo.xcprivacy */,
+			);
+			path = TapThatAppLauncher;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -82,9 +129,6 @@
 			);
 			dependencies = (
 				0F7CD7152DCF160000BC3750 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				0F7CD6D42DCF147000BC3750 /* TapThatApp */,
 			);
 			name = TapThatApp;
 			packageProductDependencies = (
@@ -105,9 +149,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				0F7CD6FD2DCF155700BC3750 /* TapThatAppLauncher */,
 			);
 			name = TapThatAppLauncher;
 			packageProductDependencies = (
@@ -135,6 +176,7 @@
 				};
 			};
 			buildConfigurationList = 0F7CD6CD2DCF147000BC3750 /* Build configuration list for PBXProject "TapThatApp" */;
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -142,11 +184,9 @@
 				Base,
 			);
 			mainGroup = 0F7CD6C92DCF147000BC3750;
-			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				0F7CD6F52DCF150200BC3750 /* XCRemoteSwiftPackageReference "HotKey" */,
 			);
-			preferredProjectObjectVersion = 77;
 			productRefGroup = 0F7CD6D32DCF147000BC3750 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -162,6 +202,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FB0012DCF147000BC00A /* Assets.xcassets in Resources */,
+				8FB0012DCF147000BC00B /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +211,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FB0022DCF147000BC002 /* Assets.xcassets in Resources */,
+				8FB0022DCF147000BC003 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +237,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FB0012DCF147000BC001 /* AppDelegate.swift in Sources */,
+				8FB0012DCF147000BC002 /* ContentView.swift in Sources */,
+				8FB0012DCF147000BC003 /* KeyEventHandling.swift in Sources */,
+				8FB0012DCF147000BC004 /* LauncherController.swift in Sources */,
+				8FB0012DCF147000BC005 /* OverlayPanel.swift in Sources */,
+				8FB0012DCF147000BC006 /* PinnedAppLoader.swift in Sources */,
+				8FB0012DCF147000BC007 /* SettingsStore.swift in Sources */,
+				8FB0012DCF147000BC008 /* SettingsView.swift in Sources */,
+				8FB0012DCF147000BC009 /* TapThatAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FB0022DCF147000BC001 /* TapThatAppLauncherApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +313,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -316,7 +370,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
