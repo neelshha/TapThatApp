@@ -198,7 +198,7 @@ struct SettingsView: View {
 
 @available(macOS 13.0, *)
 private struct OpenAtLoginSection: View {
-    private let loginItemIdentifier = "com.neelshha.TapHaloLauncher"
+    private let loginItemIdentifier = "com.neelshha.TapThatAppLauncher"
 
     @State private var openAtLogin = false
     @State private var statusMessage: String?

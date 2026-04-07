@@ -14,7 +14,7 @@ struct TapHaloLauncherApp: App {
     }
 
     private func launchMainAppIfNeeded() {
-        let mainAppBundleID = "com.neelshha.TapHalo"
+        let mainAppBundleID = "com.neelshha.TapThatApp"
 
         let isRunning = NSWorkspace.shared.runningApplications.contains {
             $0.bundleIdentifier == mainAppBundleID
