@@ -4,11 +4,12 @@
 # Xcode
 build/
 DerivedData/
-*.xcworkspace
+# Ignore only a standalone workspace at repo root (not *.xcodeproj/project.xcworkspace — needed for Package.resolved)
+/*.xcworkspace
 *.xcuserstate
 *.xcuserdata
-*.xcodeproj/project.xcworkspace/
-*.xcodeproj/xcuserdata/
+# Track project.xcworkspace/xcshareddata (Package.resolved, shared schemes) for CI/Xcode Cloud
+*.xcodeproj/project.xcworkspace/xcuserdata/
 *.xcuserdatad
 
 # SwiftPM
