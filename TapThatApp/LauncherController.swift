@@ -1,5 +1,7 @@
 import AppKit
+import Carbon
 import Cocoa
+import Combine
 import SwiftUI
 import HotKey
 
@@ -18,20 +20,17 @@ class LauncherController {
     private var isShowing = false
     private var securityScopedStops: [() -> Void] = []
     private var windowDelegate: LauncherWindowDelegate?
+    private var cancellables: Set<AnyCancellable> = []
 
     init(store: SettingsStore) {
         self.store = store
-        hotKey = HotKey(key: .space, modifiers: [.option])
-
-        hotKey?.keyDownHandler = { [weak self] in
-            self?.showLauncher()
-        }
-
-        hotKey?.keyUpHandler = { [weak self] in
-            if self?.isShowing == true {
-                self?.hideLauncher()
+        configureHotKey()
+        store.shortcutDidChange
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.configureHotKey()
             }
-        }
+            .store(in: &cancellables)
     }
 
     func showLauncher() {
@@ -126,6 +125,7 @@ class LauncherController {
 
     /// Releases security-scoped access when the window is closed by any path (red button, etc.).
     private func handleWindowClosedWithoutHideCall() {
+        guard isShowing else { return }
         window = nil
         isShowing = false
         windowDelegate = nil
@@ -133,16 +133,41 @@ class LauncherController {
     }
 
     func hideLauncher() {
+        guard isShowing else { return }
+        isShowing = false
         windowDelegate = nil
         window?.delegate = nil
         window?.close()
         window = nil
-        isShowing = false
         releaseSecurityScopedURLs()
     }
 
     private func releaseSecurityScopedURLs() {
         securityScopedStops.forEach { $0() }
         securityScopedStops = []
+    }
+
+    private func configureHotKey() {
+        let carbonModifiers = carbonModifiers(from: store.shortcutModifiers)
+        hotKey = HotKey(
+            carbonKeyCode: UInt32(store.shortcutKeyCode),
+            carbonModifiers: carbonModifiers
+        )
+        hotKey?.keyDownHandler = { [weak self] in
+            if self?.isShowing == true {
+                self?.hideLauncher()
+            } else {
+                self?.showLauncher()
+            }
+        }
+    }
+
+    private func carbonModifiers(from modifiers: NSEvent.ModifierFlags) -> UInt32 {
+        var result: UInt32 = 0
+        if modifiers.contains(.command) { result |= UInt32(cmdKey) }
+        if modifiers.contains(.option) { result |= UInt32(optionKey) }
+        if modifiers.contains(.control) { result |= UInt32(controlKey) }
+        if modifiers.contains(.shift) { result |= UInt32(shiftKey) }
+        return result
     }
 }

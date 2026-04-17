@@ -40,7 +40,7 @@ struct ContentView: View {
         let angle = 2 * .pi / CGFloat(n)
         let minRadius = (iconSize + margin) / (1.5 * sin(angle / 2))
         let ringThickness = max(iconSize * 1.5, 48)
-        let dynamicRadius = minRadius + ringThickness * 0.25
+        let dynamicRadius = max(radius, minRadius + ringThickness * 0.25)
 
         // --- Views ---
         return ZStack {
@@ -69,10 +69,10 @@ struct ContentView: View {
                         .accessibilityLabel(app.name)
                         .accessibilityHint(allowsAppLaunch ? "Press Return or click to open this app." : "")
                         .accessibilityAddTraits(allowsAppLaunch ? .isButton : [])
-                        .scaleEffect(iconScales[app.id] ?? 1.0)
-                        .rotationEffect(.degrees(iconRotations[app.id] ?? 0))
-                        .shadow(color: hoveredIndex == index ? Color.accentColor.opacity(0.45) : Color.black.opacity(0.13),
-                               radius: hoveredIndex == index ? 14 : 4, x: 0, y: 2)
+                        .scaleEffect((hoveredIndex == index || (hoveredIndex == nil && selectedIndex == index)) ? hoverScale : (iconScales[app.id] ?? 1.0))
+                        .rotationEffect(.degrees((hoveredIndex == index || (hoveredIndex == nil && selectedIndex == index)) ? hoverRotation : (iconRotations[app.id] ?? 0)))
+                        .shadow(color: (hoveredIndex == index || (hoveredIndex == nil && selectedIndex == index)) ? Color.accentColor.opacity(0.45) : Color.black.opacity(0.13),
+                               radius: (hoveredIndex == index || (hoveredIndex == nil && selectedIndex == index)) ? 14 : 4, x: 0, y: 2)
                         .scaleEffect(ringScale)
                         .opacity(ringOpacity)
                         .onTapGesture {
@@ -116,30 +116,33 @@ struct ContentView: View {
                 )
             }
 
-            // Central label for hovered app (toggle in Settings)
-            if showNames, let hovered = hoveredIndex, apps.indices.contains(hovered) {
-                let app = apps[hovered]
+            // Central label for hovered or keyboard-selected app (toggle in Settings)
+            if showNames {
+                let currentIdx = hoveredIndex ?? selectedIndex
+                if apps.indices.contains(currentIdx) {
+                    let app = apps[currentIdx]
 
-                Text(app.name)
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(.primary)
-                    .lineLimit(1)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 6)
-                    .background {
-                        Capsule()
-                            .fill(.ultraThinMaterial)
-                            .shadow(color: .black.opacity(0.15), radius: 4, x: 0, y: 1)
-                    }
-                    .overlay {
-                        Capsule()
-                            .strokeBorder(.quaternary.opacity(0.6), lineWidth: 1)
-                    }
-                    .environment(\.colorScheme, .dark)
-                    .position(x: position.x, y: position.y)
-                    .transition(.opacity)
-                    .animation(.easeInOut(duration: 0.15), value: hoveredIndex)
-                    .accessibilityLabel("Selected app: \(app.name)")
+                    Text(app.name)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.primary)
+                        .lineLimit(1)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 6)
+                        .background {
+                            Capsule()
+                                .fill(.ultraThinMaterial)
+                                .shadow(color: .black.opacity(0.15), radius: 4, x: 0, y: 1)
+                        }
+                        .overlay {
+                            Capsule()
+                                .strokeBorder(.quaternary.opacity(0.6), lineWidth: 1)
+                        }
+                        .environment(\.colorScheme, .dark)
+                        .position(x: position.x, y: position.y)
+                        .transition(.opacity)
+                        .animation(.easeInOut(duration: 0.15), value: currentIdx)
+                        .accessibilityLabel("Selected app: \(app.name)")
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

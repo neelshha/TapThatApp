@@ -40,12 +40,13 @@ struct TapHaloLauncherApp: App {
         }
     }
 
-    /// When embedded in `TapHalo.app/Contents/Library/LoginItems/`, the host app is three levels above the helper bundle.
+    /// When embedded in `TapHalo.app/Contents/Library/LoginItems/`, the host app is four levels above the helper bundle.
     private func resolveMainApplicationURL() -> URL {
         let launcherBundle = Bundle.main.bundleURL
 
         if launcherBundle.pathComponents.contains("LoginItems") {
             return launcherBundle
+                .deletingLastPathComponent()
                 .deletingLastPathComponent()
                 .deletingLastPathComponent()
                 .deletingLastPathComponent()

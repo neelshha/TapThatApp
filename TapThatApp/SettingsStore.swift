@@ -1,4 +1,5 @@
 import AppKit
+import Combine
 import Foundation
 import SwiftUI
 
@@ -6,14 +7,36 @@ class SettingsStore: ObservableObject {
     @AppStorage("showNames") var showNames: Bool = false
     @AppStorage("iconSize") var iconSize: Double = 48
     @AppStorage("ringRadius") var ringRadius: Double = 160
+    @AppStorage("shortcutKeyCode") var shortcutKeyCode: Int = 49 {
+        didSet {
+            objectWillChange.send()
+            shortcutDidChange.send(())
+        }
+    }
+    @AppStorage("shortcutModifiersRaw") var shortcutModifiersRaw: Int = Int(NSEvent.ModifierFlags.option.rawValue) {
+        didSet {
+            objectWillChange.send()
+            shortcutDidChange.send(())
+        }
+    }
 
     private let bookmarkDataKey = "selectedAppBookmarkDataList"
     private let legacyPathsKey = "selectedAppPaths"
 
     @Published private(set) var bookmarkDataList: [Data] = []
+    let shortcutDidChange = PassthroughSubject<Void, Never>()
 
     var computedRadius: Double {
         ringRadius
+    }
+
+    var shortcutModifiers: NSEvent.ModifierFlags {
+        NSEvent.ModifierFlags(rawValue: UInt(shortcutModifiersRaw))
+    }
+
+    func setShortcut(keyCode: Int, modifiers: NSEvent.ModifierFlags) {
+        shortcutKeyCode = keyCode
+        shortcutModifiersRaw = Int(modifiers.rawValue)
     }
 
     init() {
